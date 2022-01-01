@@ -1,0 +1,27 @@
+name: deploy-container
+
+on: # This will designate when we want to run this workflow, in other words, what events are we watching for.
+  push: # We are going to watch for push events.
+    branches:
+      - master # Push events only in the master branch.
+    paths: # This specifies that we only want to run this workflow whenever we make a change specifically to the container project.
+      - "packages/container/**"
+
+defaults:
+  run:
+    working-directory: packages/container # This gonna set our execution environment to inside of our container directory.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build
+
+      - uses: chrislennon/action-aws-cli@v1.1
+      - run: aws s3 sync dist s3://${{ secrets.AWS_S#_BUCKET_NAME }}/container/latest
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
