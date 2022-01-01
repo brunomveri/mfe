@@ -2,8 +2,6 @@ const { merge } = require("webpack-merge"); // 'merge' is a function that we can
 // It's what is going to allow us to take all the config that we wrote out inside the common config file
 // and merge it together with the configuration we wrote inside this development config file.
 
-const HtmlWebpackPlugin = require("html-webpack-plugin"); // This is what is going to take some HTML file inside our project and inject a couple
-// of different script tags inside of it.
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const commonConfig = require("./webpack.common");
 const packageJson = require("../package.json");
@@ -25,9 +23,6 @@ const devConfig = {
         marketing: "marketing@http://localhost:8081/remoteEntry.js", // key-value pairs where the keys are the names of the different modules that we want to import into our container.
       },
       shared: packageJson.dependencies,
-    }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
     }),
   ],
 };
