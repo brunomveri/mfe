@@ -87,9 +87,10 @@ export default function Album() {
               color="textSecondary"
               paragraph
             >
-              Something short and leading about the collection below—its
+              {/* Something short and leading about the collection below—its
               contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
+              short so folks don&apos;t simply skip over it entirely. */}
+              This is a change just to check the CICD pipeline!
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
