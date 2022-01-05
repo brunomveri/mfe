@@ -12,6 +12,7 @@ const prodConfig = {
   output: {
     filename: "[name].[contenthash].js", // this ensures that whenever we build some files for production, all
     //different files that are built are going to use this as template to figure out how to name them.
+    publicPath: "/container/latest/",
   },
   plugins: [
     new ModuleFederationPlugin({
